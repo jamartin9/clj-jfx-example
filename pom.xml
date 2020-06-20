@@ -1,0 +1,95 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <name>mvnclj</name>
+    <groupId>com.mycompany</groupId>
+    <artifactId>my-app</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>clojure</packaging>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <javafx.version>14.0.1</javafx.version>
+        <client.plugin.version>0.1.27</client.plugin.version>
+        <clojure.mainClass>jam.start</clojure.mainClass>
+        <mainClassName>jam.start</mainClassName>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.theoryinpractise</groupId>
+                <artifactId>clojure-maven-plugin</artifactId>
+                <version>1.8.4</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <mainClass>${mainClassName}</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.4</version>
+                <configuration>
+                    <mainClass>${mainClassName}</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.gluonhq</groupId>
+                <artifactId>client-maven-plugin</artifactId>
+                <version>${client.plugin.version}</version>
+                <configuration>
+                    <mainClass>${mainClassName}</mainClass>
+                    <nativeImageArgs>
+                        <list>--no-fallback</list>
+                        <list>--allow-incomplete-classpath</list>
+                        <list>--enable-all-security-services</list>
+                        <list>-H:+TraceClassInitialization</list>
+                        <list>-H:+ReportExceptionStackTraces</list>
+                        <list>-J-Dclojure.compiler.direct-linking=true</list>
+                        <list>-J-Dclojure.spec.skip-macros=true</list>
+                        <list>--initialize-at-build-time</list>
+                        <list>--initialize-at-run-time=com.sun.scenario.effect.impl.sw.sse.SSERendererDelegate,com.sun.prism.sw.SWPipeline,com.sun.marlin.MaskMarlinAlphaConsumer,javafx.scene.Node,javafx.stage.Screen,com.sun.javafx.scene.control.skin.FXVKSkin,javafx.scene.control.skin.TextInputControlSkin,javafx.scene.control.skin.ProgressIndicatorSkin,com.sun.javafx.scene.control.Properties,com.sun.javafx.scene.control.behavior,com.sun.javafx.scene.control.LambdaMultiplePropertyChangeListenerHandler,com.sun.javafx.scene.control.skin.Utils,javafx.scene.control.cell,javafx.scene.control.PopupControl,javafx.scene.control.ListView$EditEvent,javafx.crypto,javafx.net,javafx.application.Preloader$ErrorNotification,javafx.application.Preloader$ProgressNotification,javafx.application.Preloader$StateChangeNotification,com.sun.javafx.event,com.sun.javafx.tk.quantum,javafx.scene.text,javafx.scene.CssStyleHelper,com.sun.scenario.animation.AbstractMasterTimer,com.sun.javafx.scene.text,com.sun.javafx.scene.DirtyBits,com.sun.javafx.scene.EnteredExitedHandler,com.sun.javafx.scene.NodeEventDispatcher,com.sun.javafx.scene.NodeHelper,com.sun.javafx.scene.ParentHelper,com.sun.javafx.scene.transform.TransformUtils,com.sun.javafx.iio.jpeg.JPEGImageLoader,com.sun.glass.ui.gtk.GtkApplication,com.sun.prism.impl.ps,com.sun.javafx.font.AndroidFontFinder,com.sun.javafx.font.DFontDecoder,com.sun.javafx.font.MacFontFinder,com.sun.javafx.font.PrismFontFactory,com.sun.javafx.font.freetype.OSFreetype,com.sun.javafx.font.freetype.OSPango,com.sun.prism.PresentableState,com.sun.prism.es2.ES2Pipeline,com.sun.javafx.font.PrismFontFile,com.sun.javafx.text.GlyphLayout,com.sun.javafx.text.PrismTextLayout,com.sun.javafx.text.PrismTextLayoutFactory,javafx.scene.layout.VBox$StyleableProperties,javafx.scene.layout.StackPane$StyleableProperties,javafx.scene.layout.HBox$StyleableProperties,javafx.scene.layout.Region$StyleableProperties,javafx.scene.layout.Region,javafx.scene.layout.FlowPane$StyleableProperties,javafx.scene.layout.TilePane$StyleableProperties,javafx.scene.layout.GridPane$StyleableProperties,javafx.scene.control.TextField$StyleableProperties,javafx.scene.control.ScrollPane$StyleableProperties,javafx.scene.control.ToolBar$StyleableProperties,javafx.scene.control.Control$StyleableProperties,javafx.scene.control.Separator$StyleableProperties,javafx.scene.control.TextArea$StyleableProperties,javafx.scene.control.ListView$StyleableProperties,javafx.scene.control.TabPane$StyleableProperties,javafx.scene.control.SkinBase$StyleableProperties,javafx.scene.control.Labeled$StyleableProperties,javafx.scene.control.TextInputControl$StyleableProperties,javafx.scene.control.ScrollBar$StyleableProperties,javafx.scene.control.skin.CellSkinBase$StyleableProperties,javafx.scene.control.skin.TextInputControlSkin$StyleableProperties,javafx.scene.control.skin.TabPaneSkin$StyleableProperties,javafx.scene.control.skin.ProgressBarSkin$StyleableProperties,javafx.scene.control.skin.ToolBarSkin$StyleableProperties,com.sun.javafx.scene.control.ContextMenuContent$StyleableProperties,javafx.scene.image.ImageView$StyleableProperties,javafx.scene.shape.Shape$StyleableProperties,javafx.scene.shape.Rectangle$StyleableProperties</list>
+                    </nativeImageArgs>
+                    <verbose>true</verbose>
+                    <enableSWRendering>true</enableSWRendering>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.clojure</groupId>
+            <artifactId>clojure</artifactId>
+            <version>1.10.2-alpha1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>gluon</id>
+            <name>gluon</name>
+            <url>http://nexus.gluonhq.com/nexus/content/repositories/releases</url>
+        </repository>
+        <repository>
+            <id>sona</id>
+            <name>sona</name>
+            <url>http://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>gluon-releases</id>
+            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
+        </pluginRepository>
+    </pluginRepositories>
+</project>
